@@ -1,6 +1,16 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-export default function Home() {
+import { GetStaticProps } from "next";
+import { getSortedPostsData } from "../../lib/post";
+export default function Home({
+  allPostsData,
+}: {
+  allPostsData: {
+    date: string;
+    title: string;
+    id: string;
+  }[];
+}) {
   return (
     <div>
       <h1>Garam Blog</h1>
@@ -11,7 +21,23 @@ export default function Home() {
       <section className={`${styles.headingMd} ${styles.padding1px}`}>
         <h2 className={styles.headingLg}>BLOG</h2>
         <ul className={styles.list}></ul>
+        {allPostsData.map(({ id, title, date }) => (
+          <li className={styles.listItem} key={id}>
+            <a>{title}</a>
+            <br />
+            <small className={styles.lightText}>{date}</small>
+          </li>
+        ))}
       </section>
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
