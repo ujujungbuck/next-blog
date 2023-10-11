@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import CreatePost from "./CreatePost";
 
 async function getPost() {
   const res = await fetch(
@@ -19,6 +20,7 @@ const PostPage = async () => {
         {posts?.map((post) => {
           return <PostItem key={post.id} post={post} />;
         })}
+        <CreatePost />
       </ul>
     </div>
   );

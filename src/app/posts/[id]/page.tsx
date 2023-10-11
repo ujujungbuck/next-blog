@@ -4,6 +4,8 @@ async function getPost(postId: string) {
     { next: { revalidate: 10 } }
   );
 
+  if (!res.ok) throw new Error("Fail to fetch data from API");
+
   const data = res.json();
   return data;
 }
