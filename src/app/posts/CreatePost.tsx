@@ -1,6 +1,5 @@
 "use client"; // Error components must be Client Components
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CreatePost = () => {
@@ -18,7 +17,6 @@ const CreatePost = () => {
       }),
     });
     setTitle("");
-    router.refresh();
   };
 
   return (
